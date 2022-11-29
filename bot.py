@@ -35,6 +35,11 @@ def adicionarContatos():
 
         # .delete (0 = é o inicio, end até o final)
         contatosInput.delete(0, 'end')
+        
+        nomesContatos.configure(state="normal")
+        nomesContatos.delete("1.0", "end-1c")
+        nomesContatos.insert("end", ", ".join(contatos))
+        nomesContatos.configure(state="disable")
     else:
         messagebox.showerror(title="Erro", message="Digite algum contato.")
 
@@ -48,10 +53,20 @@ def adicionarMensagens():
     else:
         messagebox.showerror(title="Erro", message="Digite algo no campo de mensagem.")
 
+# reseta os contatos
+def limparContatos():
+    contatos.clear()
+    nomesContatos.configure(state="normal")
+    nomesContatos.delete("1.0", "end-1c")
+    nomesContatos.configure(state="disable")
+
+def limparMensagens():
+    mensagens.clear()
+
 # reseta os itens salvos
 def resetar():
-    contatos.clear()
-    mensagens.clear()
+    limparContatos()
+    limparMensagens()
     imagens.clear()
 
 # a função envia os arquivos para o whatsapp
@@ -64,7 +79,7 @@ def enviar():
             driver.get('https://web.whatsapp.com')
 
             # time.sleep faz com que o bot espere para mandar a mensagem
-            time.sleep(30)
+            time.sleep(25)
 
             # essa função faz com que o bot pesquise o nome do contato/grupo selecionado 
             def buscar_contato(contato):
@@ -141,8 +156,9 @@ bot = Tk()
 #.title é o titulo da janela
 bot.title("BOT ZAP ZAP")
 # .geometry é o tamanho da tela
-bot.geometry("500x380")
-
+bot.geometry("500x410")
+# .resizable impede de redimensionar a janela
+bot.resizable(width=False, height=False)
 
 # Label vai criar um texto ao lado do input
 # anchor são usadas para definir onde o texto é posicionado em relação a um ponto de referência.
@@ -162,20 +178,28 @@ contatosInput.place(x=10, y=70, width=130)
 Button(bot, text="Adicionar", command=adicionarContatos).place(
     x=150, y=65, width=100)
 
+Button(bot, text="Remover", command=limparContatos).place(
+    x=260, y=65, width=100)
+
+nomesContatos = Text(bot, state="disable", bg="lightgrey")
+nomesContatos.place(x=10, y=96, width=480, height=30)
+
 Label(bot, text="Digite as mensagem a serem enviadas:",
-      anchor=W).place(x=10, y=100)
+      anchor=W).place(x=10, y=130)
 mensagensInput = Text(bot, height=10)
-mensagensInput.place(x=10, y=130, width=480)
+mensagensInput.place(x=10, y=160, width=480)
 
 Button(bot, text="Adicionar", command=adicionarMensagens).place(
-    x=10, y=300, width=100)
+    x=10, y=330, width=100)
+
+Button(bot, text="Remover", command=limparMensagens).place(
+    x=120, y=330, width=100)
 
 Button(bot, text="Adicionar imagem", command=adicionarImagens).place(
-    x=10, y=340, width=120)
+    x=10, y=370, width=120)
 
 Button(bot, text="Enviar mensagem", command=enviar).place(
-    x=370, y=340, width=120)
-
+    x=370, y=370, width=120)
 
 #O método mainloop é usado para "travar" a execução da janela atual usando um event loop do tkinter. Isso permite com que o tkinter possa disparar respostas a eventos na instância atual da janela que chamou o mainloop, como um keypress ou click e não permite a execução de códigos posteriores até que a janela seja fechada.
 bot.mainloop()
