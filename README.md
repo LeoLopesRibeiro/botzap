@@ -28,3 +28,7 @@ Funcionalidades
 ✅ Interface gráfica
 
 
+Print da aplicação
+=======
+
+[Print](assets/bot1.jpg)
