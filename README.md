@@ -31,4 +31,4 @@ Funcionalidades
 Print da aplicação
 =======
 
-[Print](assets/bot1.jpg)
+![Print](assets/bot1.jpg)
