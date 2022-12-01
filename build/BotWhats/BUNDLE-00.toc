@@ -1,0 +1,4 @@
+([('BotWhats',
+   '/Users/admin/Documents/Senai/Desenvolvimento de '
+   'Sistemas/INDMO/botzap/dist/BotWhats',
+   'EXECUTABLE')],)

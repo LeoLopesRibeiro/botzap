@@ -33,3 +33,15 @@ Prints da aplicação
 
 ![Prints](assets/bot1.jpg)
 ![Prints](assets/bot2.jpg)
+
+# Comando build
+
+### Para Windows:
+```
+  pyinstaller --onefile --noconsole --windowed --icon="./robo.ico" bot.py
+```
+
+### Para Mac:
+```
+  pyinstaller --onefile --noconsole --windowed --icon="./robo.icns" bot.py
+```
